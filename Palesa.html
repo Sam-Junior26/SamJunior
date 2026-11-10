@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff0f4" />
+  <title>A Little Question For You 💗</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+    :root { --pink:#e85d83; --deep:#9f3154; --ink:#422b36; --soft:#fff0f4; }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh; display:grid; place-items:center; padding:24px;
+      color:var(--ink); font-family:'DM Sans',sans-serif; overflow-x:hidden;
+      background:radial-gradient(circle at 15% 15%,#ffe0e9 0,transparent 32%),
+                 radial-gradient(circle at 85% 85%,#fbd7e3 0,transparent 30%),#fff8fa;
+    }
+    .card {
+      width:min(100%,620px); position:relative; text-align:center; padding:clamp(30px,7vw,62px);
+      border:1px solid #f8d5e0; border-radius:30px; background:rgba(255,255,255,.88);
+      box-shadow:0 24px 70px rgba(159,49,84,.13); backdrop-filter:blur(10px);
+    }
+    .tag { display:inline-block; color:var(--deep); background:#fff0f4; border-radius:99px; padding:8px 14px; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; font-weight:700; }
+    .heart { font-size:3rem; margin:18px 0 8px; display:inline-block; animation:pulse 1.5s infinite; }
+    h1 { font:600 clamp(2rem,7vw,3.4rem)/1.12 'Playfair Display',serif; margin:8px 0 16px; color:#7f2948; }
+    .intro { max-width:440px; margin:0 auto 28px; color:#765d68; line-height:1.8; font-size:1.02rem; }
+    .question { font:600 clamp(1.35rem,4.5vw,2rem) 'Playfair Display',serif; margin:24px 0 28px; }
+    .buttons { display:flex; justify-content:center; align-items:center; gap:14px; flex-wrap:wrap; min-height:54px; }
+    button { border:0; border-radius:999px; padding:15px 27px; font:700 1rem 'DM Sans',sans-serif; cursor:pointer; transition:transform .2s, box-shadow .2s; }
+    button:hover { transform:translateY(-3px); }
+    #yes { color:white; background:linear-gradient(135deg,#ee7898,#d94e79); box-shadow:0 9px 22px #e85d8340; }
+    #no { color:#8b5267; background:#fff0f4; border:1px solid #f5d4df; }
+    .small { margin-top:28px; color:#b18b9a; font-size:.82rem; }
+    .hidden { display:none; }
+    #success { animation:appear .6s ease both; }
+    #success h2 { font:600 clamp(2rem,7vw,3rem) 'Playfair Display',serif; color:#9f3154; margin:12px 0; }
+    #success p { line-height:1.8; color:#765d68; }
+    .signature { margin-top:24px; color:#9f3154; font:italic 1.25rem 'Playfair Display',serif; }
+    .sparkle { position:fixed; pointer-events:none; font-size:20px; animation:float 5s linear forwards; opacity:.7; }
+    @keyframes pulse { 50% { transform:scale(1.13); } }
+    @keyframes appear { from { opacity:0; transform:translateY(12px) scale(.97); } to { opacity:1; transform:none; } }
+    @keyframes float { from { transform:translateY(0) rotate(0); opacity:.8; } to { transform:translateY(-110vh) rotate(35deg); opacity:0; } }
+    @media(max-width:420px) { .card { border-radius:23px; } button { padding:14px 22px; } }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <section id="ask">
+      <span class="tag">A little something for you</span>
+      <div class="heart">💗</div>
+      <h1>Hey, beautiful</h1>
+      <p class="intro">
+        I've really enjoyed getting to know you. You make me smile and feel happy every time when we're on a call. I always find myself looking forward to our conversations and every moment we share.
+
+There's something I've been wanting to ask you, and I hope your answer will make me smile as much as you make me smile. ❤️
+
+      </p>
+      <div class="question">Will you be my girlfriend? 🌷</div>
+      <div class="buttons">
+        <button id="yes" type="button">Yes, I'd love to! 💕</button>
+        <button id="no" type="button">Let me think 🤭</button>
+      </div>
+      <p class="small">Made with a little courage and a lot of affection.</p>
+    </section>
+
+    <section id="success" class="hidden" aria-live="polite">
+      <div class="heart">🥹💖</div>
+      <h2>You just made me the happiest person!</h2>
+      <p>
+        I can't wait to make beautiful memories with you.
+        Thank you for giving us a chance. Here's to something special. ❤️
+      </p>
+      <div class="signature">With love, <span id="senderName">Your person</span></div>
+    </section>
+  </main>
+
+  <script>
+    // Personalise this name before sharing the website.
+    const senderName = "Junior(hubby)";
+    document.getElementById("senderName").textContent = senderName;
+
+    const ask = document.getElementById("ask");
+    const success = document.getElementById("success");
+    document.getElementById("yes").addEventListener("click", () => {
+      ask.classList.add("hidden");
+      success.classList.remove("hidden");
+      for (let i = 0; i < 24; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("span");
+          heart.className = "sparkle";
+          heart.textContent = ["💗", "💕", "✨", "🌸"][Math.floor(Math.random() * 4)];
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.bottom = "-30px";
+          heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 6000);
+        }, i * 90);
+      }
+    });
+
+    const noButton = document.getElementById("no");
+    const playfulLines = ["Are you sure? 🥺", "Think about it? 💗", "I'll be right here 🌷", "No pressure, take your time 😊"];
+    let line = 0;
+    noButton.addEventListener("click", () => {
+      noButton.textContent = playfulLines[line % playfulLines.length];
+      line++;
+    });
+  </script>
+</body>
+</html>
